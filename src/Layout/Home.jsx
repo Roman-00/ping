@@ -5,9 +5,6 @@ export const Home = () => {
     const [value, setValue] = React.useState('');
     const [difference, setDifference] = React.useState();
 
-    console.log('value', value);
-    console.log('difference', difference);
-
     const handleChange = (e) => {
 
         setValue(e.target.value);
@@ -28,14 +25,14 @@ export const Home = () => {
 
     };
 
-    return <div class="container">
+    return <div className="container">
 
-        <div class="home__input--block">
-            <input type="text" placeholder="Введите url сервера" class="home__input" onChange={handleChange} />
-            <button type="submit" class="home__button--server" onClick={() => getOptions()}>Отправить запрос</button>
+        <div className="home__input--block">
+            <input type="text" placeholder="Введите url сервера" className="home__input" onChange={handleChange} />
+            <button type="submit" className="home__button--server" onClick={() => getOptions()}>Отправить запрос</button>
         </div>
 
-        <div class="home__result">
+        <div className="home__result">
             Время ответа от сервера составляет: {difference ? difference : 0} ms
         </div>
 
