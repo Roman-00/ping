@@ -3,43 +3,43 @@ import React from 'react';
 export const Home = () => {
 
     const [value, setValue] = React.useState('');
-
-    const [start, setStart] = React.useState();
-    const [end, setEnd] = React.useState();
     const [difference, setDifference] = React.useState();
 
-    console.log('start', start);
-    console.log('end', end);
+    console.log('value', value);
     console.log('difference', difference);
 
     const handleChange = (e) => {
+
         setValue(e.target.value);
+
     };
 
     const getOptions = () => {
 
-        setStart(new Date());
+        const start = Date.now();
 
-        fetch(`${value}`)
+        fetch(`${value}`, { mode: 'no-cors'})
             .then(() => {
-                setEnd(new Date());
-                setDifference(end - start);
+                setDifference(Date.now() - start);
             })
             .catch((error) => {
-                console.log(error);
+                console.log('error', error);
             });
+
     };
 
-    return <>
-        <input 
-            type="text" 
-            className="home__input"
-            onChange={handleChange}
-        />
-        <button onClick={() => getOptions()}>Запросить</button>
-        <div>
-            <span>Время отклика от сервера: {difference ? difference : 0}</span><br />
+    return <div class="container">
+
+        <div class="home__input--block">
+            <input type="text" placeholder="Введите url сервера" class="home__input" onChange={handleChange} />
+            <button type="submit" class="home__button--server" onClick={() => getOptions()}>Отправить запрос</button>
         </div>
-    </>
+
+        <div class="home__result">
+            Время ответа от сервера составляет: {difference ? difference : 0} ms
+        </div>
+
+
+    </div>;
 
 };
